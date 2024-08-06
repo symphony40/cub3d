@@ -6,22 +6,32 @@
 #    By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:21:14 by vejurick          #+#    #+#              #
-#    Updated: 2024/07/30 17:44:24 by vejurick         ###   ########.fr        #
+#    Updated: 2024/08/06 10:55:57 by vejurick         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3d
 CC			=	cc
-FLAG		=	-Wall -Wextra -Werror
+FLAG		=	-Wall -Wextra
 LIBFT_PATH	=	./libft/
 LIBFT_FILE	=	libftprintf.a
 MLX_FILE	=	libmlx.a
 LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
-MLX_FLAG	=	-lX11 -lXext
-MLX_PATH	=	./minilibx-linux/
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S), Darwin)
+    MLX_FLAG	=	-L/opt/X11/lib -lX11 -lXext
+    MLX_PATH	=	./minilibx-mac-osx/
+else
+    MLX_FLAG	=	-lX11 -lXext
+    MLX_PATH	=	./minilibx-linux/
+endif
+
 MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
 MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)
-C_FILE		=	main.c parsing.c error.c parsing_floor_ceiling.c parsing_map.c parsing_textures.c find_player_and_map_size.c
+
+C_FILE		=	main.c parsing.c error.c parsing_floor_ceiling.c parsing_map.c parsing_textures.c find_player_and_map_size.c map_checks.c
 SRC_DIR		=	./src/
 INC_DIR		=	./include/
 SRC			=	$(addprefix $(SRC_DIR),$(C_FILE))

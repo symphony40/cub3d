@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vejurick <vejurick@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:07 by vejurick          #+#    #+#             */
-/*   Updated: 2024/07/30 14:54:21 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/05 23:36:04 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	separate_map_and_textures(t_map *map)
 	find_textures(map);
 	find_map(map);
 	map->map_in_array = ft_split(map->map, '\n');
+	has_walls_around(map);
 	space_to_wall(map);
 }
 

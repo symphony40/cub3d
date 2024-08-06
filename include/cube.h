@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:24:55 by vejurick          #+#    #+#             */
-/*   Updated: 2024/07/31 14:20:59 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/05 23:49:02 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	find_textures(t_map *map);
 int		find_textures2(t_map *map, int no_found, int so_found);
 int		parse_textures(const char *line, const char **textures);
 int		textures_final_check(int no_found, int so_found, int we_found, int ea_found, t_map *map);
+void	has_walls_around(t_map *map);
+void	has_walls_around2(t_map *map);
 void	space_to_wall(t_map *map);
 void	calculate_map_dimensions(t_map *map);
 void	find_player(t_map *map, t_player *player);

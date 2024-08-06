@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:24:42 by vejurick          #+#    #+#             */
-/*   Updated: 2024/07/31 14:25:17 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/03 20:48:10 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void readme(t_map *map, t_player *player)
 	printf("FLOOR: %i, %i, %i\n", map->floor_color[0],map->floor_color[1],map->floor_color[2]);
 	printf("\nIn t_player is saved coordinates of the player and the way he is facing:\n");
 	printf("x: %i y: %i facing: %i\n", player->x,player->y, player->facing);
+	printf("%s\n", map->map);
 }
 
 void	init_map_struct(t_map *map)
@@ -86,7 +87,7 @@ int	main(int argc, char **argv)
 	validate_args(argc, argv);
 	parse_map(argv, &map);
 	find_player(&map, &player);
-	readme(&map, &player);
+	// readme(&map, &player);
 	// game.mlx_p = mlx_init();
 	// mlx_new_window(game.mlx_p, 1920, 1080, "Cub3D");
 	// mlx_loop(game.mlx_p);
