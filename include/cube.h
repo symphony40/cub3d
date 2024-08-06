@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:24:55 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/05 23:49:02 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:29:39 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@
 # define SOUTH 2
 # define WEST 3
 # define EAST 4
+# define IMG_W 64
+# define IMG_H 64
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
 
 typedef struct s_player
 {
@@ -89,5 +96,7 @@ void	space_to_wall(t_map *map);
 void	calculate_map_dimensions(t_map *map);
 void	find_player(t_map *map, t_player *player);
 void	ft_final_free(t_map *map);
+int		on_destroy(t_game *game);
+int		on_keypress(int keysym, t_game *game);
 
 #endif

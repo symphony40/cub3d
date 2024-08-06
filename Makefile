@@ -6,7 +6,7 @@
 #    By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:21:14 by vejurick          #+#    #+#              #
-#    Updated: 2024/08/06 10:55:57 by vejurick         ###   ########.fr        #
+#    Updated: 2024/08/06 14:38:26 by vejurick         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ endif
 MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
 MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)
 
-C_FILE		=	main.c parsing.c error.c parsing_floor_ceiling.c parsing_map.c parsing_textures.c find_player_and_map_size.c map_checks.c
+C_FILE		=	main.c parsing.c error.c parsing_floor_ceiling.c parsing_map.c parsing_textures.c find_player_and_map_size.c map_checks.c mlx_actions.c
 SRC_DIR		=	./src/
 INC_DIR		=	./include/
 SRC			=	$(addprefix $(SRC_DIR),$(C_FILE))
