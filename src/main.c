@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:24:42 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/06 18:29:02 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:00:38 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,8 @@ int	main(int argc, char **argv)
 	find_player(&map, &player);
 	// readme(&map, &player);
 	game.map = &map;
-	game.mlx_p = mlx_init();
-	game.win_ptr = mlx_new_window(game.mlx_p, 1920, 1080, "Cub3D");
-	if (!game.win_ptr)
-	{
-		ft_final_free(&map);
-		return (free(game.mlx_p), 1);
-	}
-	mlx_key_hook(game.win_ptr, on_keypress, &game);
-	mlx_hook(game.win_ptr, 33, 1L << 17, on_destroy, &game);
-	mlx_loop(game.mlx_p);
+	game.player = &player;
+	starting_mlx_loop(&game);
 	ft_final_free(&map);
 	return (EXIT_SUCCESS);
 }

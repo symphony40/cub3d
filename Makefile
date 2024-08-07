@@ -6,58 +6,63 @@
 #    By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:21:14 by vejurick          #+#    #+#              #
-#    Updated: 2024/08/06 14:38:26 by vejurick         ###   ########.fr        #
+#    Updated: 2024/08/07 11:33:09 by vejurick         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	cub3d
-CC			=	cc
-FLAG		=	-Wall -Wextra
-LIBFT_PATH	=	./libft/
+COLOR = \033[0;34m
+RESET_COLOR = \033[0m
+
+NAME = cub3D
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+SRCDIR = src/
+INCDIR = include
+OBJDIR = obj
+LIBMLX = MLX42
+LIBFT = ./libft/
 LIBFT_FILE	=	libftprintf.a
-MLX_FILE	=	libmlx.a
-LIBFT_LIB	=	$(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
+LIBFT_LIB	=	$(addprefix $(LIBFT), $(LIBFT_FILE))
+LIB_BREW = /Users/${USER}/.brew/Cellar/glfw/3.4/lib
+HEADERS	= -I $(INCDIR) -I $(LIBMLX)/include
+LIBFT_FLAGS = -L$(LIBFT)
+LMX_FLAGS = -L$(LIBMLX)/build -L$(LIB_BREW) -lmlx42 -ldl -pthread -lglfw -lm
+LIBS_FLAGS = $(LIBFT_FLAGS) $(LMX_FLAGS)
+SRCS =  $(SRCDIR)/main.c  \
+		$(SRCDIR)/error.c  \
+		$(SRCDIR)/find_player_and_map_size.c  \
+		$(SRCDIR)/map_checks.c  \
+		$(SRCDIR)/mlx_actions.c  \
+		$(SRCDIR)/parsing_floor_ceiling.c  \
+		$(SRCDIR)/parsing_map.c  \
+		$(SRCDIR)/parsing_textures.c  \
+		$(SRCDIR)/parsing.c  \
 
-UNAME_S := $(shell uname -s)
-
-ifeq ($(UNAME_S), Darwin)
-    MLX_FLAG	=	-L/opt/X11/lib -lX11 -lXext
-    MLX_PATH	=	./minilibx-mac-osx/
-else
-    MLX_FLAG	=	-lX11 -lXext
-    MLX_PATH	=	./minilibx-linux/
-endif
-
-MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
-MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)
-
-C_FILE		=	main.c parsing.c error.c parsing_floor_ceiling.c parsing_map.c parsing_textures.c find_player_and_map_size.c map_checks.c mlx_actions.c
-SRC_DIR		=	./src/
-INC_DIR		=	./include/
-SRC			=	$(addprefix $(SRC_DIR),$(C_FILE))
-OBJ			=	$(SRC:.c=.o)
-
-.c.o:
-	$(CC) $(FLAG) -c $< -o $@
+OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
-lib:
-	make -C $(LIBFT_PATH)
+$(NAME): $(OBJS)
+	@cmake $(LIBMLX) -B $(LIBMLX)/build
+	@make -C $(LIBMLX)/build -j4
+	@make -C $(LIBFT)
+	@$(CC) $(OBJS) $(CFLAGS) $(LIBS_FLAGS) $(HEADERS) $(LIBFT_LIB) -o $(NAME)
+	@echo "$(COLOR)Compiling and linking: done$(RESET_COLOR)"
 
-mlx:
-	make -sC $(MLX_PATH)
-
-$(NAME): lib mlx $(OBJ)
-	$(CC) $(OBJ) $(LIBFT_LIB) $(MLX_EX) -o $(NAME)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean:
-	make clean -sC $(LIBFT_PATH)
-	rm -f $(OBJ)
+	@rm -f $(OBJS)
+	@rm -rf $(OBJDIR)
+	@make -C $(LIBFT) clean
+	@rm -rf $(LIBMLX)/build
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C $(LIBFT_PATH)
+	@rm -f $(NAME)
+	@make -C $(LIBFT) fclean
+	@echo "$(COLOR)Full clean: done$(RESET_COLOR)"
 
 re: fclean all
 

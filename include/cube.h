@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:24:55 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/06 18:29:39 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:20:00 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include "get_next_line.h"
-# include "../minilibx-linux/mlx.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -69,7 +69,7 @@ typedef struct s_game
 	t_map		*map;
 	t_player	*player;
 	void		*mlx_p;
-	void		*win_ptr;
+	mlx_image_t	*win_ptr;
 }				t_game;
 
 void	validate_args(int argc, char **argv);
@@ -96,7 +96,7 @@ void	space_to_wall(t_map *map);
 void	calculate_map_dimensions(t_map *map);
 void	find_player(t_map *map, t_player *player);
 void	ft_final_free(t_map *map);
-int		on_destroy(t_game *game);
-int		on_keypress(int keysym, t_game *game);
+void	starting_mlx_loop(t_game *game);
+void	keypress(void* param);
 
 #endif
