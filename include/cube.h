@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:24:55 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/22 21:27:56 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:02:16 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,17 @@ typedef struct s_game
 	double		ray_distance;
 	int			w_map;		// map width
 	int			h_map;
-	int			leftRight;
-	int			upDown;
+	int			left_right;
+	int			up_down;
 	int			rotate;
-	
 }				t_game;
 
 void	validate_args(int argc, char **argv);
 void	ft_error(char *message, int status);
 void	ft_error_and_free_map(char *message, int status, t_map *map);
 void	ft_error_and_free_parsed_map(char *message, int status, t_map *map);
-void	ft_error_and_free_map_and_textures(char *message, int status, t_map *map);
+void	ft_error_and_free_map_and_textures(char *message,
+			int status, t_map *map);
 void	parse_map(char **argv, t_map *map);
 void	read_map_file(t_map *map);
 void	separate_map_and_textures(t_map *map);
@@ -110,7 +110,8 @@ void	find_map(t_map *map);
 void	find_textures(t_map *map);
 int		find_textures2(t_map *map, int no_found, int so_found);
 int		parse_textures(const char *line, const char **textures);
-int		textures_final_check(int no_found, int so_found, int we_found, int ea_found, t_map *map);
+int		textures_final_check(int no_found, int so_found, int we_found,
+			int ea_found, t_map *map);
 void	has_walls_around(t_map *map);
 void	has_walls_around2(t_map *map);
 void	space_to_wall(t_map *map);
@@ -118,7 +119,7 @@ void	calculate_map_dimensions(t_map *map);
 void	find_player(t_map *map, t_player *player);
 void	ft_final_free(t_map *map);
 void	starting_mlx_loop(t_game *game);
-void	keypress(mlx_key_data_t keydata, void* param);
+void	keypress(mlx_key_data_t keydata, void *param);
 void	cast_rays(t_game *game);
 void	move_player(t_game *game, double move_x, double move_y);
 void	rotate_player(t_game *game, int i);

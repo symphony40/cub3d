@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 18:19:30 by vejurick          #+#    #+#             */
-/*   Updated: 2024/07/31 14:07:48 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:06:26 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ int	parse_textures(const char *line, const char **texture)
 
 	ptr = line;
 	ptr = ptr + 3;
-
-	
 	*texture = ft_strdup(ptr);
 	fd = open(*texture, O_RDONLY);
 	if (fd < 0)

@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:07 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/05 23:36:04 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:06:06 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	space_to_wall(t_map *map)
 
 	i = 0;
 	j = 0;
-	while(map->map_in_array[i])
+	while (map->map_in_array[i])
 	{
-		while(map->map_in_array[i][j])
+		while (map->map_in_array[i][j])
 		{
 			if (ft_isspace(map->map_in_array[i][j]))
 				map->map_in_array[i][j] = 49;

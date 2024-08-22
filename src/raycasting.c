@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:28:34 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/22 21:12:42 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:06:53 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 	}
 	else
 	{
-		if (!(angle > PI / 2 && angle < 3 * PI / 2)) 
+		if (!(angle > PI / 2 && angle < 3 * PI / 2))
 		{
 			*inter += TILE_SIZE;
 			return (-1);
@@ -83,7 +83,7 @@ float	get_v_inter(t_game *game, float angl)
 	float	y_step;
 	int		pixel;
 
-	x_step = TILE_SIZE; 
+	x_step = TILE_SIZE;
 	y_step = TILE_SIZE * tan(angl);
 	v_x = floor(game->player->x_pixels / TILE_SIZE) * TILE_SIZE;
 	pixel = inter_check(angl, &v_x, &x_step, 0);

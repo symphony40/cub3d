@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_floor_ceiling.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vejurick <vejurick@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:25:09 by vejurick          #+#    #+#             */
-/*   Updated: 2024/07/30 14:48:24 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:02:45 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	find_floor_and_ceiling(t_map *map)
 		if (ft_strncmp(map->map_file_contents[map->i], "F", 1) == 0)
 		{
 			if (parse_color(map->map_file_contents[map->i], map->floor_color) == 0)
-				
 				map->floor_found = 1;
 			else
 				ft_error_and_free_map("Invalid floor color format", EXIT_FAILURE, map);

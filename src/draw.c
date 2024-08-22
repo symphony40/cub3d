@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 21:05:15 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/22 21:55:07 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:05:46 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	get_color(t_game *game, int flag)
 
 void	draw_wall(t_game *game, int ray, int t_pix, int b_pix)
 {
-	int color;
+	int	color;
 
 	color = get_color(game, game->wall_flag);
 	while (t_pix < b_pix)
