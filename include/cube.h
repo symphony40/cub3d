@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:24:55 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/07 15:20:00 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:50:08 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <errno.h>
 # include <signal.h>
 # include <unistd.h>
+# include <math.h>
 
 # define NORTH 1
 # define SOUTH 2
@@ -37,12 +38,23 @@
 # define A 97
 # define S 115
 # define D 100
+# define PI 3.14159
+# define FOV 60
+# define S_W 1900 // screen width
+# define S_H 1000 // screen height
+# define TILE_SIZE 30 // tile size
+# define ROTATION_SPEED 0.045 // rotation speed
+# define PLAYER_SPEED 4	// player speed
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int	facing;
+	int		x;
+	int		y;
+	int		x_pixels;
+	int		y_pixels;
+	int		facing;
+	float	angle;
+	float	fov_radians;
 }				t_player;
 
 typedef struct s_map
@@ -69,7 +81,16 @@ typedef struct s_game
 	t_map		*map;
 	t_player	*player;
 	void		*mlx_p;
-	mlx_image_t	*win_ptr;
+	mlx_image_t	*img_ptr;
+	double		ray_angle;
+	int			wall_flag;
+	double		ray_distance;
+	int			w_map;		// map width
+	int			h_map;
+	int			leftRight;
+	int			upDown;
+	int			rotate;
+	
 }				t_game;
 
 void	validate_args(int argc, char **argv);
@@ -97,6 +118,7 @@ void	calculate_map_dimensions(t_map *map);
 void	find_player(t_map *map, t_player *player);
 void	ft_final_free(t_map *map);
 void	starting_mlx_loop(t_game *game);
-void	keypress(void* param);
+void	keypress(mlx_key_data_t keydata, void* param);
+void	cast_rays(t_game *game);
 
 #endif

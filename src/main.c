@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:24:42 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/07 15:00:38 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:56:57 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ void	validate_args(int argc, char **argv)
 		ft_error("Map must be .cub", EXIT_FAILURE);
 }
 
-void readme(t_map *map, t_player *player)
-{
-	int i = 0;
-	printf("\nMap is stored in map->map_in_array in a 2D array. All whitespace is replaced by walls (1):\n");
-	while (map->map_in_array[i])
-	{
-		printf("%s\n", map->map_in_array[i]);
-		i++;
-	}
-	printf("\nMap dimesions are stored in map->rows and map->columns:\n");
-	printf("rows: %i columns: %i\n", map->rows,map->columns);
-	printf("\nPaths to textures are stored as strings in map->texture_north/south/etc.:\n");
-	printf("NORTH: %s\n", map->texture_north);
-	printf("SOUTH: %s\n", map->texture_south);
-	printf("WEST: %s\n", map->texture_west);
-	printf("EAST: %s\n", map->texture_east);
-	printf("\nCeiling and floor colours are stored in map->ceiling_color and map->floor_color:\n");
-	printf("CEILING: %i, %i, %i\n", map->ceiling_color[0],map->ceiling_color[1],map->ceiling_color[2]);
-	printf("FLOOR: %i, %i, %i\n", map->floor_color[0],map->floor_color[1],map->floor_color[2]);
-	printf("\nIn t_player is saved coordinates of the player and the way he is facing:\n");
-	printf("x: %i y: %i facing: %i\n", player->x,player->y, player->facing);
-	printf("%s\n", map->map);
-}
+// void readme(t_map *map, t_player *player)
+// {
+	// int i = 0;
+	// printf("\nMap is stored in map->map_in_array in a 2D array. All whitespace is replaced by walls (1):\n");
+	// while (map->map_in_array[i])
+	// {
+	// 	printf("%s\n", map->map_in_array[i]);
+	// 	i++;
+	// }
+	// printf("\nMap dimesions are stored in map->rows and map->columns:\n");
+	// printf("rows: %i columns: %i\n", map->rows,map->columns);
+	// printf("\nPaths to textures are stored as strings in map->texture_north/south/etc.:\n");
+	// printf("NORTH: %s\n", map->texture_north);
+	// printf("SOUTH: %s\n", map->texture_south);
+	// printf("WEST: %s\n", map->texture_west);
+	// printf("EAST: %s\n", map->texture_east);
+	// printf("\nCeiling and floor colours are stored in map->ceiling_color and map->floor_color:\n");
+	// printf("CEILING: %i, %i, %i\n", map->ceiling_color[0],map->ceiling_color[1],map->ceiling_color[2]);
+	// printf("FLOOR: %i, %i, %i\n", map->floor_color[0],map->floor_color[1],map->floor_color[2]);
+	// printf("\nIn t_player is saved coordinates of the player and the way he is facing:\n");
+	// printf("x: %i y: %i facing: %i\n", player->x,player->y, player->facing);
+	// printf("%s\n", map->map);
+// }
 
 void	init_map_struct(t_map *map)
 {
@@ -87,7 +87,9 @@ int	main(int argc, char **argv)
 	validate_args(argc, argv);
 	parse_map(argv, &map);
 	find_player(&map, &player);
-	// readme(&map, &player);
+	player.x_pixels = player.x * TILE_SIZE + TILE_SIZE / 2;
+	player.y_pixels = player.y * TILE_SIZE + TILE_SIZE / 2;
+	player.fov_radians = (FOV * PI) / 180;
 	game.map = &map;
 	game.player = &player;
 	starting_mlx_loop(&game);
