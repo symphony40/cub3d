@@ -6,7 +6,7 @@
 #    By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/24 14:21:14 by vejurick          #+#    #+#              #
-#    Updated: 2024/08/20 15:05:15 by vejurick         ###   ########.fr        #
+#    Updated: 2024/08/22 21:12:29 by vejurick         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ RESET_COLOR = \033[0m
 
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 SRCDIR = src/
 INCDIR = include
 OBJDIR = obj
@@ -38,6 +38,9 @@ SRCS =  $(SRCDIR)/main.c  \
 		$(SRCDIR)/parsing_textures.c  \
 		$(SRCDIR)/parsing.c  \
 		$(SRCDIR)/raycasting.c  \
+		$(SRCDIR)/movement.c  \
+		$(SRCDIR)/draw.c  \
+		$(SRCDIR)/raycasting_utils.c  \
 
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 

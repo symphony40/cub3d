@@ -6,7 +6,7 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 17:24:55 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/22 20:50:08 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:27:56 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,14 @@ void	ft_final_free(t_map *map);
 void	starting_mlx_loop(t_game *game);
 void	keypress(mlx_key_data_t keydata, void* param);
 void	cast_rays(t_game *game);
+void	move_player(t_game *game, double move_x, double move_y);
+void	rotate_player(t_game *game, int i);
+void	my_mlx_pixel_put(t_game *game, int x, int y, unsigned int color);
+void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix);
+int		get_color(t_game *game, int flag);
+void	draw_wall(t_game *game, int ray, int t_pix, int b_pix);
+void	render_wall(t_game *game, int ray);
+float	nor_angle(float angle);
+int		unit_circle(float angle, char c);
 
 #endif

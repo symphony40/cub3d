@@ -6,112 +6,17 @@
 /*   By: vejurick <vejurick@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:28:34 by vejurick          #+#    #+#             */
-/*   Updated: 2024/08/22 20:59:40 by vejurick         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:12:42 by vejurick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube.h"
 
-void	my_mlx_pixel_put(t_game *game, int x, int y, int color)	// put the pixel
-{
-	if (x < 0) // check the x position
-		return ;
-	else if (x >= S_W)
-		return ;
-	if (y < 0) // check the y position
-		return ;
-	else if (y >= S_H)
-		return ;
-	mlx_put_pixel(game->img_ptr, x, y, color); // put the pixel
-}
-
-float	nor_angle(float angle)	// normalize the angle
-{
-	if (angle < 0)
-		angle += (2 * M_PI);
-	if (angle > (2 * M_PI))
-		angle -= (2 * M_PI);
-	return (angle);
-}
-
-void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)	// draw the floor and the ceiling
-{
-	int		i;
-
-	i = b_pix;
-	while (i < S_H)
-		my_mlx_pixel_put(game, ray, i++, 0xB99470FF); // floor
-	i = 0;
-	while (i < t_pix)
-		my_mlx_pixel_put(game, ray, i++, 0x89CFF3FF); // ceiling
-}
-
-int	get_color(t_game *game, int flag)	// get the color of the wall
-{
-	game->ray_angle = nor_angle(game->ray_angle); // normalize the angle
-	if (flag == 0)
-	{
-		if (game->ray_angle > M_PI / 2 && game->ray_angle < 3 * (M_PI / 2))
-			return (0xB5B5B5FF); // west wall
-		else
-			return (0xB5B5B5FF); // east wall
-	}
-	else
-	{
-		if (game->ray_angle > 0 && game->ray_angle < M_PI)
-			return (0xF5F5F5FF); // south wall
-		else
-			return (0xF5F5F5FF); // north wall
-	}
-}
-
-void	draw_wall(t_game *game, int ray, int t_pix, int b_pix)	// draw the wall
-{
-	int color;
-
-	color = get_color(game, game->wall_flag);
-	while (t_pix < b_pix)
-		my_mlx_pixel_put(game, ray, t_pix++, color);
-}
-
-void	render_wall(t_game *game, int ray)	// render the wall
-{
-	double	wall_h;
-	double	b_pix;
-	double	t_pix;
-
-	game->ray_distance *= cos(nor_angle(game->ray_angle - game->player->angle)); // fix the fisheye
-	wall_h = (TILE_SIZE / game->ray_distance) * ((S_W / 2) / tan(game->player->fov_radians / 2)); // get the wall height
-	b_pix = (S_H / 2) + (wall_h / 2); // get the bottom pixel
-	t_pix = (S_H / 2) - (wall_h / 2); // get the top pixel
-	if (b_pix > S_H) // check the bottom pixel
-		b_pix = S_H;
-	if (t_pix < 0) // check the top pixel
-		t_pix = 0;
-	draw_wall(game, ray, t_pix, b_pix); // draw the wall
-	draw_floor_ceiling(game, ray, t_pix, b_pix); // draw the floor and the ceiling
-}
-
-int	unit_circle(float angle, char c)	// check the unit circle
-{
-	if (c == 'x')
-	{
-		if (angle > 0 && angle < M_PI)
-			return (1);
-	}
-	else if (c == 'y')
-	{
-		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
-			return (1);
-	}
-	return (0);
-}
-
-int	inter_check(float angle, float *inter, float *step, int is_horizon)	// check the intersection
+int	inter_check(float angle, float *inter, float *step, int is_horizon)
 {
 	if (is_horizon)
 	{
-		if (angle > 0 && angle < M_PI)
+		if (angle > 0 && angle < PI)
 		{
 			*inter += TILE_SIZE;
 			return (-1);
@@ -120,7 +25,7 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)	// check
 	}
 	else
 	{
-		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2)) 
+		if (!(angle > PI / 2 && angle < 3 * PI / 2)) 
 		{
 			*inter += TILE_SIZE;
 			return (-1);
@@ -130,7 +35,7 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)	// check
 	return (1);
 }
 
-int	wall_hit(float x, float y, t_game *game)	// check the wall hit
+int	wall_hit(float x, float y, t_game *game)
 {
 	int		x_m;
 	int		y_m;
